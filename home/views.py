@@ -1,7 +1,11 @@
 from django.shortcuts import render,redirect
 from .models import Project,Report,FileReport
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 import os.path
+import csv
+import datetime
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def _handle_uploaded_file(file):
@@ -14,6 +18,10 @@ def index(request):
     return render(request, 'index.html')
 
 def add_project(request):
+    if request.user.is_authenticated:
+        pass
+    else:
+        return redirect('login')
     if request.method == "POST":
         name = request.POST['name']
         description = request.POST['description']
@@ -52,6 +60,10 @@ def remove_project(request):
     return render(request, 'remove_credit.html')
 
 def overview(request):
+    if request.user.is_authenticated:
+        pass
+    else:
+        return redirect('login')
     projects_list = Project.objects.all()
     referer = str(request.META.get('HTTP_REFERER'))
     ctx = {
@@ -134,3 +146,15 @@ def update_report(request,id):
 
 def settings(request):
     return render(request, 'settings.html')  
+
+def export_csv(request,id):
+    project = Project.objects.get(id=id)
+    reports = Report.objects.filter(project=project)
+    response = HttpResponse(content_type='text/csv')
+    response["Content-Disposition"] = 'attachment; filename=Reports'+'for'+str(project.name)+str(datetime.datetime.now())+'.csv'
+    writer = csv.writer(response)
+    writer.writerow(['User','Description','Topic','Type','Amount'])
+    for report in reports:
+        writer.writerow([report.user,report.description,report.topic,report.money_choice,report.amount])
+
+    return response

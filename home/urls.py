@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('',views.index,name="index"),
     path('add-project/',views.add_project,name="add_project"),
+    path('Export-csv/<int:id>',views.export_csv,name="export_csv"),
     path('project-edit/<int:id>',views.project_edit,name="project_edit"),
     path('remove-project/',views.remove_project,name="remove_project"),
     path('overview/',views.overview,name="overview"),
