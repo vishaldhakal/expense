@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="container mt-5 pt-4">
+    <div class="row row-cols-1 row-cols-sm-3 mb-2">
+      <div class="col"></div>
+      <div class="col">
+        <div class="row row-cols-2 bg-light py-2 font-weight-bold ">
+            <div class="col text-left">
+                <a href="{% url 'add_project' %}" class="btn">
+                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5.5a.5.5 0 0 0 0-1H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5z"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="col text-right py-2">
+                <strong>Edit Project</strong>
+            </div>
+        </div>
+    </div>
+      <div class="col"></div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-1">
+        <div class="col">
+            <form action="{% url 'project_edit' project.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{project.name}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea type="text" class="form-control" id="description" name="description">{{project.description}}</textarea>
+                    </div>
+                    <span class="badge bg-mine">Members in this Project</span>
+                    {% for mem in users %}
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="{{mem.id}}" name="members" id="flexCheckDefault" {% if mem in project.members.all %}checked{% endif %}>
+                        <label class="form-check-label" for="flexCheckDefault">
+                        {{mem}}
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-success btn-block" value="Update"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+
+{% endblock %}

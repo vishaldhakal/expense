@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div class="container mt-5 pt-4">
+  <div class="row row-cols-1 row-cols-sm-3 mb-5">
+    <div class="col"></div>
+    <div class="col">
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row row-cols-2 row-cols-md-4">
+    <a href="{% url 'overview' %}" class="col my-2 btnlink">
+      <div class="cont p-3 myshad rounded text-center">
+        <img src="{% static 'images/overview.png' %}" alt="overview icon">
+        <br>
+        <b>Reports</b>
+      </div>
+    </a>
+    <a href="{% url 'add_project' %}" class="col my-2 btnlink">
+      <div class="cont p-3 myshad rounded text-center">
+        <img src="{% static 'images/creditadd.png' %}" alt="credit add icon">
+        <br>
+        <b>Projects</b>
+      </div>
+    </a>
+    <a href="{% url 'remove_project' %}" class="col my-2 btnlink">
+      <div class="cont p-3 myshad rounded text-center">
+        <img src="{% static 'images/creditrem.png' %}" alt="credit remove icon">
+        <br>
+        <b>Rem Project</b>
+      </div>
+    </a>
+    <a href="{% url 'index' %}" class="col my-2 btnlink myRipple" ripple-color='red'>
+      <div class="cont p-3 myshad rounded text-center">
+        <img src="{% static 'images/home.png' %}" alt="home icon">
+        <br>
+        <b>Home</b>
+      </div>
+    </a>
+    <a href="{% url 'index' %}" class="col my-2 btnlink">
+      <div class="cont p-3 myshad rounded text-center">
+        <img src="{% static 'images/add.png' %}" alt="add icon">
+        <br>
+        <b>Add Person</b>
+      </div>
+    </a>
+    <a href="{% url 'index' %}" class="col my-2 btnlink">
+      <div class="cont p-3 myshad rounded text-center">
+        <img src="{% static 'images/remove.png' %}" alt="remove icon">
+        <br>
+        <b>Remove Person</b>
+      </div>
+    </a>
+    <a href="#" class="col my-2 btnlink">
+      <div class="cont p-3 myshad rounded text-center">
+        <img src="{% static 'images/data.png' %}" alt="data icon">
+        <br>
+        <b>See Data</b>
+      </div>
+    </a>
+    <a href="{% url 'settings' %}" class="col my-2 btnlink">
+      <div class="cont p-3 myshad rounded text-center">
+        <img src="{% static 'images/setting.png' %}" alt="settings icon">
+        <br>
+        <b>Settings</b>
+      </div>
+    </a>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

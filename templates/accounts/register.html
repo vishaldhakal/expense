@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block body %}
+<div class="py-5 my-5">
+  <article class="card-body mx-auto col-md-6 col-lg-4 col-sm-12">
+    <h4 class="card-title mt-3 text-center">Create Account</h4>
+    <p class="text-center">Get started with your account</p>
+    <form action="{% url 'register' %}" method="POST">
+      {% csrf_token %}
+      <div class="form-group input-group mb-3">
+        <div class="input-group-prepend">
+        </div>
+        <input name="username" class="form-control" placeholder="Username" type="text">
+      </div> <!-- form-group// -->
+      <div class="form-group input-group mb-3">
+        <div class="input-group-prepend">
+        </div>
+        <input name="email" class="form-control" placeholder="Email" type="email">
+      </div> <!-- form-group// -->
+      <div class="form-group input-group mb-3">
+        <div class="input-group-prepend">
+        </div>
+        <input class="form-control" placeholder="Create password" type="password" name="password">
+      </div> <!-- form-group// -->
+      <div class="form-group input-group mb-3">
+        <div class="input-group-prepend">
+        </div>
+        <input class="form-control" placeholder="Repeat password" type="password" name="password2">
+      </div> <!-- form-group// -->
+      <div class="form-group mb-3">
+        <button type="submit" class="btn btn-success btn-block no-border2"> Create Account </button>
+      </div> <!-- form-group// -->
+      <p class="text-center">Have an account? <a href="{% url 'login' %}">Log In</a> </p>
+    </form>
+  </article>
+</div> <!-- card.// -->
+{% endblock %}

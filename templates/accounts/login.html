@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static  %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block body %}
+<div class="py-5 my-5">
+	<article class="card-body mx-auto col-md-6 col-lg-4 col-sm-12">
+		<h4 class="card-title mt-3 text-center">Signin with your Account</h4>
+		<p class="text-center">Get started with your account</p>
+		<form action="{% url 'login' %}" method="POST">
+			{% csrf_token %}
+
+			<div class="form-group input-group mb-3">
+				<input name="username" class="form-control" placeholder="Username" type="text">
+			</div> <!-- form-group// -->
+			<div class="form-group input-group mb-3">
+				<input class="form-control" placeholder="Password" type="password" name="password">
+			</div> <!-- form-group// -->
+			<a href="#" class=" my-3 mr-4">Forget Password ?</a>
+			<a href="{% url 'reset_password' %}" class=" my-3 ml-4">Reset Password ?</a>
+			<div class="form-group my-2">
+				<button type="submit" class="btn btn-success btn-block"> Login </button>
+			</div> <!-- form-group// -->
+			<p class="text-center">Have an account? <a href="{% url 'register' %}">Register</a> </p>
+		</form>
+	</article>
+</div>
+{% endblock %}

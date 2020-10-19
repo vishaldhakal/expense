@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div class="remove_person pt-5 mt-5">
+    <div class="container">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+
+        <table id="myTable">
+            <tr class="header">
+                <th style="width:50%;">Name</th>
+                <th style="width:30%;" class="text-center">Credit</th>
+                <th style="width:20%;" class="text-center">Action</th>
+            </tr>
+            {% for person in persons %}
+            <tr>
+                <td>{{person.name}}</td>
+                <td class="text-center">{{person.total_due}}</td>
+                <td class="text-center text-danger">
+                    <a href="{% url 'remove_person_submit' person.id %}" class="text-danger">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-dash-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                        </svg>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/filter.js' %}"></script>
+{% endblock %}

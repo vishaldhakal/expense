@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="container mt-5 pt-4">
+    <div class="row row-cols-1 row-cols-sm-3 mb-2">
+        <div class="col"></div>
+        <div class="col">
+            <div class="row row-cols-2 bg-light py-2 font-weight-bold ">
+                <div class="col text-left">
+                    <a href="{% url 'overview' %}" class="btn">
+                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle-fill"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5.5a.5.5 0 0 0 0-1H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5z" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="col text-right py-2">
+                    <strong>Reports</strong>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="row row-cols-2 row-cols-md-4">
+        <div class="col">
+            <div class="my-2 btnlink myRipple" ripple-color='red'>
+                <div class=" bg-light cont p-1 myshad rounded text-center">
+                    <br>
+                    <b>Incoming</b>
+                    <p>
+                        <span class="badge bg-success">Rs.{{project.calculateIncomings}}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="my-2 btnlink myRipple" ripple-color='red'>
+                <div class="bg-light cont p-1 myshad rounded text-center">
+                    <br>
+                    <b>Outgoing</b>
+                    <p>
+                        <span class="badge bg-danger">Rs.{{project.calculateOutgoings}}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-4">
+        {% for rep in reports %}
+        <div class="col my-2">
+            <a href="{% url 'report_single' rep.id %}" class="my-2 btnlink myRipple" ripple-color='red'>
+                <div class="cont p-1 myshad rounded text-center">
+                    <br>
+                    <b>{{rep.topic}}</b>
+                    <p>
+                        <span class="badge {% if rep.money_choice == 'Incoming' %} bg-success {% else %} bg-danger {% endif %}">{{rep.money_choice}}</span>
+                        <span class="badge bg-light text-dark">Rs.{{rep.amount}}</span>
+                    </p>
+                    <a href="{% url 'edit_report' rep.id %}" class="btn no-border2">
+                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil text-success" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                        </svg>
+                    </a>
+                    <a href="{% url 'delete_report' rep.id %}" class="btn no-border2">
+                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-archive-fill text-danger" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z"/>
+                          </svg>
+                    </a>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="conatiner bg-light p-3 myb">
+    <div class="row row-cols-1 text-center">
+        <div class="col">
+            <a href="#" class="btn btn-success no-border2" data-toggle="modal" data-target="#exampleModal">Add Income / Expenditure</a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title py-2" id="exampleModalLabel">Add Your Income / Expenditure</h6>
+                <button type="button" class="btn text-danger no-border2" data-dismiss="modal" aria-label="Close">
+                    <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-x-circle-fill" fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                    </svg>
+                </button>
+            </div>
+            <form action="{% url 'report_submit' project.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="topic" class="form-label">Topic</label>
+                        <input type="text" class="form-control" id="topic" name="topic">
+                    </div>
+                    <div class="mb-3">
+                        <label for="file" class="form-label">Upload related files:[Bills]</label>
+                        <input type="file" class="form-control" id="file" name="file" multiple>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea type="text" class="form-control" id="description" name="description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="moneytype" class="form-label">Money Type</label>
+                        <select name="moneytype" id="moneytype">
+                            <option value="Incoming">
+                                Income
+                            </option>
+                            <option value="Outgoing">
+                                Expenditure
+                            </option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount</label>
+                        <input type="text" name="amount" class="form-control" id="amount">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-success btn-block" value="Add"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="py-5">
+
+</div>
+{% endblock %}

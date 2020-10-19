@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="add_person mt-5 pt-5">
+    <div class="container">
+        <form action="{% url 'add_person' %}" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control no-border" id="name" name="name">
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" class="form-control no-border" id="address" name="address">
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="text" class="form-control no-border" id="phone" name="phone">
+            </div>
+            <div class="mb-3">
+                <label for="details" class="form-label">Details</label>
+                <input type="text" class="form-control no-border" id="details" name="details">
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-success no-border2">Add Person</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
