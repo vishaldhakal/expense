@@ -8,6 +8,11 @@
   <article class="card-body mx-auto col-md-6 col-lg-4 col-sm-12">
     <h4 class="card-title mt-3 text-center">Create Account</h4>
     <p class="text-center">Get started with your account</p>
+    {% if error %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			{{error}}
+		  </div>
+		  {% endif %}
     <form action="{% url 'register' %}" method="POST">
       {% csrf_token %}
       <div class="form-group input-group mb-3">

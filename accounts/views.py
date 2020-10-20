@@ -23,7 +23,10 @@ def login(request):
             auth.login(request,user)
             return redirect('index')
         else:
-            return redirect('login')
+            ctx={
+                'error':"Username or Password doesnot match"
+            }
+            return render(request, 'accounts/login.html',ctx)
     else:
         return render(request, 'accounts/login.html')
 
@@ -43,14 +46,14 @@ def register(request):
         if password == password2:
             #check username
             if User.objects.filter(username = username).exists():
-               return redirect('register') 
+               return render(request, 'accounts/register.html',{'error':"Username already exists !"}) 
             else :
                 if User.objects.filter(email = email).exists():
-                    return redirect('register') 
+                    return render(request, 'accounts/register.html',{'error':"Email already exists !"}) 
                 else :
                     user = User.objects.create_user(username = username,password=password,email=email)
                     user.save()
-                    return redirect('login') 
+                    return render(request, 'accounts/login.html',{'error':"Account Sucessfully created Please Login Now!"})  
 
         else:
             return redirect('register')
