@@ -52,7 +52,7 @@ def project_edit(request,id):
         allusers = User.objects.all()
         ctx = {
             'users':allusers,
-            'project':project
+            'project':project,
         }
         return render(request, 'edit_project.html',ctx)
 
@@ -90,10 +90,11 @@ def report_submit(request,id):
         topic = request.POST['topic']
         amount = request.POST['amount']
         moneytype = request.POST['moneytype']
+        cashtype = request.POST['cashtype']
         description = request.POST['description']
         files = request.FILES.getlist('file')
         user = User.objects.get(id=request.user.id)
-        inst = Report.objects.create(user=user,topic=topic,project=proj,description=description,money_choice=moneytype,amount=amount)
+        inst = Report.objects.create(user=user,topic=topic,project=proj,description=description,money_choice=moneytype,amount=amount,money_method=cashtype)
         inst.save()
         for afile in files:
             _handle_uploaded_file(afile)
@@ -134,15 +135,29 @@ def update_report(request,id):
         topic = request.POST['topic']
         amount = request.POST['amount']
         moneytype = request.POST['moneytype']
+        cashtype = request.POST['cashtype']
         description = request.POST['description']    
         report.topic=topic
         report.description=description
         report.money_choice=moneytype
+        report.money_method=cashtype
         report.amount=amount
         report.save()
 
     proj = report.project.id 
     return redirect('project_single',proj)
+
+def lab(request):
+    return render(request, 'lab.html')  
+
+def project_task(request,id):
+    project = Project.objects.get(id=id)
+    referer = str(request.META.get('HTTP_REFERER'))
+    ctx = {
+        'project':project,
+        'back_page':referer
+    }
+    return render(request, 'projects_task.html',ctx) 
 
 def settings(request):
     return render(request, 'settings.html')  

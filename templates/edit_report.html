@@ -45,6 +45,20 @@
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label for="cashtype" class="form-label">Cash Method</label>
+                        <select name="cashtype" id="cashtype">
+                            <option value="Cash" {% if report.money_method == 'Cash' %}selected{% endif %}>
+                                Cash
+                            </option>
+                            <option value="Cheque" {% if report.money_method == 'Cheque' %}selected{% endif %}>
+                                Cheque
+                            </option>
+                            <option value="Other" {% if report.money_method == 'Other' %}selected{% endif %}>
+                                Other
+                            </option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="amount" class="form-label">Amount</label>
                         <input type="text" name="amount" class="form-control" id="amount" value="{{report.amount}}">
                     </div>

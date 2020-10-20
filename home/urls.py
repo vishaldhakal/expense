@@ -3,11 +3,13 @@ from . import views
 
 urlpatterns = [
     path('',views.index,name="index"),
+    path('lab/',views.lab,name="lab"),
     path('add-project/',views.add_project,name="add_project"),
     path('Export-csv/<int:id>',views.export_csv,name="export_csv"),
     path('project-edit/<int:id>',views.project_edit,name="project_edit"),
     path('remove-project/',views.remove_project,name="remove_project"),
     path('overview/',views.overview,name="overview"),
+    path('project-task/<int:id>',views.project_task,name="project_task"),
     path('edit-report/<int:id>',views.edit_report,name="edit_report"),
     path('delete-report/<int:id>',views.delete_report,name="delete_report"),
     path('update-report/<int:id>',views.update_report,name="update_report"),

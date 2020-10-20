@@ -13,24 +13,31 @@
       <div class="cont p-3 myshad rounded text-center">
         <img src="{% static 'images/overview.png' %}" alt="overview icon">
         <br>
-        <b>Reports</b>
+        <b>Projects</b>
       </div>
     </a>
     <a href="{% url 'add_project' %}" class="col my-2 btnlink">
       <div class="cont p-3 myshad rounded text-center">
         <img src="{% static 'images/creditadd.png' %}" alt="credit add icon">
         <br>
-        <b>Projects</b>
+        <b>Add Project</b>
       </div>
     </a>
-    <!-- <a href="{% url 'index' %}" class="col my-2 btnlink">
+    <a href="{% url 'lab' %}" class="col my-2 btnlink">
       <div class="cont p-3 myshad rounded text-center">
-        <img src="{% static 'images/creditrem.png' %}" alt="credit remove icon">
+        <img src="{% static 'images/home.png' %}" alt="credit remove icon">
         <br>
-        <b>Remove</b>
+        <b>Lab</b>
       </div>
     </a>
-    <a href="{% url 'index' %}" class="col my-2 btnlink myRipple" ripple-color='red'>
+    <a href="{% url 'index' %}" class="col my-2 btnlink">
+      <div class="cont p-3 myshad rounded text-center">
+        <img src="{% static 'images/games.png' %}" alt="credit remove icon">
+        <br>
+        <b>Games</b>
+      </div>
+    </a>
+    <!-- <a href="{% url 'index' %}" class="col my-2 btnlink myRipple" ripple-color='red'>
       <div class="cont p-3 myshad rounded text-center">
         <img src="{% static 'images/home.png' %}" alt="home icon">
         <br>

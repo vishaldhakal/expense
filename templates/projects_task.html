@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="container mt-5 pt-4">
+    <div class="row row-cols-1 row-cols-sm-3 mb-2">
+        <div class="col"></div>
+        <div class="col">
+            <div class="row row-cols-3 bg-light py-2 font-weight-bold ">
+                <div class="col text-left">
+                    <a href="{% url 'overview' %}" class="btn no-border2">
+                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle-fill"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5.5a.5.5 0 0 0 0-1H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5z" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="col text-right py-3">
+                    <strong>{{project.name}}</strong>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-4">
+        
+        <div class="col my-2">
+            <a href="{% url 'project_single' project.id %}" class="my-2 btnlink myRipple" ripple-color='red'>
+                <h5 class="cont p-1 py-4 rounded text-center myshad">
+                    Budget management
+                </h5>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="py-5">
+
+</div>
+{% endblock %}

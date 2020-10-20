@@ -35,7 +35,12 @@
                   {{report.description}}
               </p>
               <p>
-                <span class="badge bg-success">{{report.user}}</span>
+                <span class="badge {% if report.money_choice == 'Incoming' %} bg-success {% else %} bg-danger {% endif %}">{{report.money_choice}}</span>
+                <span class="badge bg-success">{{report.money_method}}</span>
+                <span class="badge bg-light text-dark">Rs.{{report.amount}}</span>
+            </p>
+              <p>
+                <span class="badge bg-success">Submitted By : {{report.user}}</span>
               </p>
             </div>
         </div>
