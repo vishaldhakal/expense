@@ -16,7 +16,7 @@ SECRET_KEY = 'xbo-y5zmi9o&=35nvb9yd=el&l=3zl_!9q*4^7r1*ao4#2^sqk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['www.vishaldhakal.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
