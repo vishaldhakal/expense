@@ -3,42 +3,48 @@
 
 <div class="container mt-5 pt-4">
     <div class="row row-cols-1 row-cols-sm-3 mb-2">
-      <div class="col"></div>
-      <div class="col">
-        <div class="row row-cols-2 bg-light py-2 font-weight-bold ">
-            <div class="col text-left">
-                <a href="{% url 'index' %}" class="btn">
-                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5.5a.5.5 0 0 0 0-1H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5z"/>
-                    </svg>
-                </a>
-            </div>
-            <div class="col text-right py-2">
-                <strong>Project</strong>
+        <div class="col"></div>
+        <div class="col">
+            <div class="row row-cols-2 bg-light py-2 font-weight-bold ">
+                <div class="col text-left">
+                    <a href="{% url 'index' %}" class="btn no-border2">
+                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle-fill"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5.5a.5.5 0 0 0 0-1H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5z" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="col text-right py-2">
+                    <strong>Project</strong>
+                </div>
             </div>
         </div>
-    </div>
-      <div class="col"></div>
+        <div class="col"></div>
     </div>
     <div class="row row-cols-2 row-cols-md-4">
         {% for proj in projects %}
-          <a {% if request.user.is_staff %} href="{% url 'project_edit' proj.id %}" {% else %} href="#" {% endif %} class="col my-2 btnlink myRipple" ripple-color='red'>
+        <a {% if request.user.is_staff %} href="{% url 'project_edit' proj.id %}" {% else %} href="#" {% endif %}
+            class="col my-2 btnlink myRipple" ripple-color='red'>
             <div class="cont p-3 myshad rounded text-center">
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pie-chart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z"/>
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pie-chart-fill" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z" />
                 </svg>
-              <br>
-              <b>{{proj.name}}</b>
+                <br>
+                <b>{{proj.name}}</b>
             </div>
-          </a>
+        </a>
         {% endfor %}
-        </div>
-  </div>
-  <div class="conatiner bg-light p-3 myb">
+    </div>
+</div>
+<div class="conatiner bg-light p-3 myb">
     <div class="row row-cols-1 text-center">
         <div class="col">
             {% if request.user.is_staff %}
-            <a href="#" class="btn btn-success no-border2" data-toggle="modal" data-target="#exampleModal">Add Project</a>
+            <a href="#" class="btn btn-success no-border2" data-toggle="modal" data-target="#exampleModal">Add
+                Project</a>
             {% else %}
             <span class="font-weight-bold text-danger">You are not admin !</span>
             {% endif %}
