@@ -63,3 +63,18 @@ class Report(models.Model):
 class FileReport(models.Model):
     file = models.FileField()
     report = models.ForeignKey(Report,on_delete=models.CASCADE)
+
+class Tools(models.Model):
+    name = models.CharField(max_length=600)
+    image = models.FileField()
+    amount = models.FloatField()
+    no_of_pices = models.IntegerField()
+    bought_from = models.CharField(max_length=600)
+    bought_date = models.DateField()
+    bought_by = models.ForeignKey(User,on_delete=models.CASCADE)
+    description = models.TextField()
+    is_available = models.BooleanField(default=True)
+
+    def getId(self):
+        varr = self.name.replace(" ","")
+        return varr

@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Project,Report,FileReport
+from .models import Project,Report,FileReport,Tools
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 import os.path
@@ -100,7 +100,7 @@ def report_submit(request,id):
             _handle_uploaded_file(afile)
             fil = FileReport.objects.create(file=afile,report=inst)
             fil.save()
-    return redirect('project_single',id)
+    return redirect('overview')
 
 def report_single(request,id):
     report = Report.objects.get(id=id)
@@ -148,7 +148,30 @@ def update_report(request,id):
     return redirect('project_single',proj)
 
 def lab(request):
-    return render(request, 'lab.html')  
+    if request.method == "POST":
+        tool_name = request.POST['tool_name']
+        tool_image = request.FILES['tool_image']
+        description = request.POST['description'] 
+        amount = request.POST['amount'] 
+        no_of_pices = request.POST['noo']
+        bought_from = request.POST['bought_from']
+        bought_by = request.POST['bought_by']
+        bought_date = request.POST['bought_date']
+        us = User.objects.get(username=bought_by)
+        inst = Tools.objects.create(name=tool_name,image=tool_image,description=description,bought_by=us,bought_from=bought_from,bought_date=bought_date,no_of_pices=no_of_pices,amount=amount)
+        inst.save()
+        _handle_uploaded_file(tool_image)
+        users = User.objects.all()
+        tools = Tools.objects.all()
+        return redirect('index')
+    else:    
+        users = User.objects.all()
+        tools = Tools.objects.all()
+        ctx = {
+            'users':users,
+            'tools':tools
+        }
+        return render(request, 'lab.html',ctx)  
 
 def project_task(request,id):
     project = Project.objects.get(id=id)

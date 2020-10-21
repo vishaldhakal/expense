@@ -1,4 +1,5 @@
 
+import dj_database_url
 import os
 from pathlib import Path
 
@@ -15,7 +16,7 @@ SECRET_KEY = 'xbo-y5zmi9o&=35nvb9yd=el&l=3zl_!9q*4^7r1*ao4#2^sqk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['vishaldhakal.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['www.vishaldhakal.herokuapp.com']
 
 # Application definition
 
@@ -71,7 +72,6 @@ DATABASES = {
     }
 }
 
-import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
@@ -122,7 +122,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-#SMTP configuratio
+# SMTP configuratio
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
